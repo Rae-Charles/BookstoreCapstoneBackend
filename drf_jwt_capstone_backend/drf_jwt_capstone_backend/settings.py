@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'authentication.apps.AuthenticationConfig',
     'corsheaders',
     'books.apps.BooksConfig',
-    'shoppingcart.apps.ShoppingCartConfig',
+    # 'shopping_cart.apps.ShoppingCartConfig',
 ]
 
 MIDDLEWARE = [

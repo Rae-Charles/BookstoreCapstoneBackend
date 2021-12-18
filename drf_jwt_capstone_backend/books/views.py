@@ -9,11 +9,9 @@ from .serializers import BooksSerializer
 from django.contrib.auth.models import User
 
 # Create your views here.
-class BooksList(APIView):
-
-    permission_classes = [AllowAny]
-
-    def get(self, request):
-        books = Books.objects.all()
-        serializer = BooksSerializer(books, many=True)
-        return Response(serializer.data)
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_all_books(request):
+    books = Books.objects.all()
+    serializer = BooksSerializer(books, many=True)
+    return Response(serializer.data)

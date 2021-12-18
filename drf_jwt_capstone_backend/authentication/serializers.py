@@ -2,6 +2,8 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import get_user_model
+# from drf_jwt_capstone_backend.shopping_cart.models import ShoppingCart
+# from drf_jwt_capstone_backend.books.models import Books
 User = get_user_model()
 
 
@@ -36,3 +38,16 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
         return user
 
+
+# class BooksSerializer(serializers.ModelSerializer):
+    
+#     class Meta:
+#         model = Books    
+#         fields = ('author', 'title', 'genre', 'description', 'price', 'quantity', 'user_id')
+
+
+# class BooksSerializer(serializers.ModelSerializer):
+
+#     class Meta:
+#         model = ShoppingCart
+#         fields = ('author', 'title', 'genre', 'description', 'price', 'quantity', 'total', 'user_id')
