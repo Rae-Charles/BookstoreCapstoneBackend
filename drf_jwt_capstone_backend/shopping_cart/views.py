@@ -11,7 +11,7 @@ from .serializers import ShoppingCartSerializer
 # Create your views here.
 class ShoppingCartList(APIView):
 
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         # need to filter on front end
@@ -20,13 +20,19 @@ class ShoppingCartList(APIView):
         return Response(serializer.data)
 
 
-    # def post(self, request):
+    def post(self, request):
+
+        if request.method == 'POST':
+            serializer = ShoppingCartSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save(user=request.user)
+                return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
 
-
-    # def delete(self, request, pk):
-    #     shopping_cart= ShoppingCart.objects.all()
-
-        
+    def delete(self, request, pk):
+        books = ShoppingCart.get_books(pk)
+        books.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)      
 
 

@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view, permission_classes
 from .models import Books
 from .serializers import BooksSerializer
 from django.contrib.auth.models import User
+from django.http import Http404
 
 
 # Create your views here.
