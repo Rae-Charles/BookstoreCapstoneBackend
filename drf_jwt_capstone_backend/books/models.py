@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.http.response import Http404
+from rest_framework.views import APIView
 User = get_user_model()
 
 # Create your models here.

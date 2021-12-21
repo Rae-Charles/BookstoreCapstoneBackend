@@ -37,17 +37,3 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
-
-
-# class BooksSerializer(serializers.ModelSerializer):
-    
-#     class Meta:
-#         model = Books    
-#         fields = ('author', 'title', 'genre', 'description', 'price', 'quantity', 'user_id')
-
-
-# class BooksSerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = ShoppingCart
-#         fields = ('author', 'title', 'genre', 'description', 'price', 'quantity', 'total', 'user_id')

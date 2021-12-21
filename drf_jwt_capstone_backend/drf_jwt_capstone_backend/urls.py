@@ -20,5 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/auth/', include('authentication.urls')),
     path('api/books/', include('books.urls')),
-    # path('api/shoppingcart/', include('shoppingcart.urls'))
+    path('api/shoppingcart/', include('shopping_cart.urls')),
+    path('', include('books.urls'))
+
 ]
