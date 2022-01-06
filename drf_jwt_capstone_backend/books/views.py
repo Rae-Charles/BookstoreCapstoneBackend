@@ -18,7 +18,6 @@ def get_all_books(request):
     return Response(serializer.data)
 
 
-
 class BooksDetail(APIView):
 
     def get_books(self, pk):

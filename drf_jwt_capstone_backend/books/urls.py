@@ -4,5 +4,5 @@ from .views import BooksDetail
 
 urlpatterns = [
     path('', views.get_all_books),
-    path('api/books/<int:pk>', views.BooksDetail.as_view()),
+    path('<int:pk>', views.BooksDetail.as_view()),
 ]

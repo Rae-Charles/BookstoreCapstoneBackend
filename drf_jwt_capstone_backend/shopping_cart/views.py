@@ -6,18 +6,23 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import ShoppingCart
 from .serializers import ShoppingCartSerializer
-
-
+from django.apps import apps
 # Create your views here.
+
 class ShoppingCartList(APIView):
 
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         # need to filter on front end
-        shopping_cart= ShoppingCart.objects.all()
-        serializer = ShoppingCartSerializer(shopping_cart, many=True)
-        return Response(serializer.data)
+        # shopping_cart= ShoppingCart.objects.all()
+        # serializer = ShoppingCartSerializer(shopping_cart, many=True)
+        # return Response(serializer.data)
+        if request.method == 'GET':
+            # books = Books.objects.filter(user_id=request.user.id)
+            books=apps.get_model('books.Books')
+            serializer = ShoppingCartSerializer(books, many=True)
+            return Response(serializer.data)
 
 
     def post(self, request):
@@ -27,12 +32,12 @@ class ShoppingCartList(APIView):
             if serializer.is_valid():
                 serializer.save(user=request.user)
                 return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
     def delete(self, request, pk):
-        books = ShoppingCart.get_books(pk)
+        books = self.get_books(pk)
         books.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)      
+        return Response(status=status.HTTP_204_NO_CONTENT)   
 
 
