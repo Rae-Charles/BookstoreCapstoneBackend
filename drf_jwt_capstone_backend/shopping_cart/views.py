@@ -13,11 +13,11 @@ class ShoppingCartList(APIView):
 
     permission_classes = [IsAuthenticated]
 
-    def get(self, request):
+    def get(self, request, Id):
         # need to filter on front end
         # users_shopping_cart_items = ShoppingCart.objects.filter(user_id=request.user.id)
         Books = apps.get_model('books.Books')
-        users_books = Books.objects.filter(shoppingcart__user=request.user)
+        users_books = Books.objects.filter(shoppingcart__user=Id)
         serializer = BooksSerializer(users_books, many=True)
         return Response(serializer.data)
 

@@ -3,5 +3,5 @@ from rest_framework import views
 from .views import ShoppingCartList
 
 urlpatterns = [
-    path('', ShoppingCartList.as_view())
+    path('<int:Id>', ShoppingCartList.as_view())
 ]
