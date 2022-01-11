@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.decorators import api_view, permission_classes
 from .models import ShoppingCart
-from .serializers import ShoppingCartSerializer
+from .serializers import ShoppingCartSerializer, BooksSerializer
 from django.apps import apps
 # Create your views here.
 
@@ -15,14 +15,11 @@ class ShoppingCartList(APIView):
 
     def get(self, request):
         # need to filter on front end
-        # shopping_cart= ShoppingCart.objects.all()
-        # serializer = ShoppingCartSerializer(shopping_cart, many=True)
-        # return Response(serializer.data)
-        if request.method == 'GET':
-            # books = Books.objects.filter(user_id=request.user.id)
-            books=apps.get_model('books.Books')
-            serializer = ShoppingCartSerializer(books, many=True)
-            return Response(serializer.data)
+        # users_shopping_cart_items = ShoppingCart.objects.filter(user_id=request.user.id)
+        Books = apps.get_model('books.Books')
+        users_books = Books.objects.filter(shoppingcart__user=request.user)
+        serializer = BooksSerializer(users_books, many=True)
+        return Response(serializer.data)
 
 
     def post(self, request):
@@ -41,3 +38,12 @@ class ShoppingCartList(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)   
 
 
+
+    # users_shopping_cart_items = Book.objects.filter
+    # serializer = ShoppingCartSerializer(shopping_cart, many=True)
+    # # return Response(serializer.data)
+    # if request.method == 'GET':
+    #     books = Books.objects.filter(user_id=request.user.id)
+    #     books=apps.get_model('books.Books')
+    #     serializer = ShoppingCartSerializer(books, many=True)
+    #     return Response(serializer.data)

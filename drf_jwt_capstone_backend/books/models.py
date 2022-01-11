@@ -12,3 +12,6 @@ class Books(models.Model):
     genre = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=5)
+
+    def __str__(self) -> str:
+        return self.title
